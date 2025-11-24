@@ -47,8 +47,8 @@ $(document).ready(function () {
             return false;
         }
 
-        if (hobbies.length < 4) {
-            showAlert('Pilih minimal empat hobi!', 'warning');
+        if (hobbies.length == 0) {
+            showAlert('Pilih minimal satu hobi!', 'warning');
             return false;
         }
 

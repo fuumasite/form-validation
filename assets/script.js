@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    // Toggle other hobby input
     $('#otherHobbyCheckbox').on('change', function () {
         if ($(this).is(':checked')) {
             $('#otherHobbyInput').slideDown(300);
@@ -9,11 +8,10 @@ $(document).ready(function () {
             $('#otherHobbyText').val('');
         }
     });
-    // Form Submit Handler
+
     $('#registrationForm').on('submit', function (e) {
         e.preventDefault();
 
-        // Get form values
         const username = $('#username').val().trim();
         const birthdate = $('#birthdate').val();
         const gender = $('input[name="gender"]:checked').val();
@@ -22,7 +20,7 @@ $(document).ready(function () {
         $('input[name="hobby"]:checked').each(function () {
             hobbies.push($(this).val());
         });
-        // Add other hobby if checked and filled
+
         if ($('#otherHobbyCheckbox').is(':checked')) {
             const otherHobby = $('#otherHobbyText').val().trim();
             if (otherHobby !== '') {
@@ -30,7 +28,7 @@ $(document).ready(function () {
             }
         }
 
-        // Validation
+        // Validasi
         if (username === '') {
             showAlert('Username tidak boleh kosong!', 'warning');
             $('#username').focus();
@@ -59,7 +57,7 @@ $(document).ready(function () {
             return false;
         }
 
-        // Show success alert
+        // success alert
         showAlert('Data berhasil dikirim!', 'success');
 
         // Format tanggal
@@ -67,7 +65,7 @@ $(document).ready(function () {
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
         const formattedDate = dateObj.toLocaleDateString('id-ID', options);
 
-        // Create result HTML
+        // Hasil Html
         let hobbiesHTML = '';
         hobbies.forEach(hobby => {
             hobbiesHTML += `<span class="badge-hobby">${hobby}</span>`;
@@ -92,13 +90,13 @@ $(document).ready(function () {
                     </div>
                 `;
 
-        // Show modal with result
+        // hasil  modal
         $('#resultContent').html(resultHTML);
         const modal = new bootstrap.Modal(document.getElementById('resultModal'));
         modal.show();
     });
 
-    // Reset button handler
+    // button reset
     $('button[type="reset"]').on('click', function () {
         setTimeout(function () {
             $('#otherHobbyInput').hide();

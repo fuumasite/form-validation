@@ -16,6 +16,7 @@ $(document).ready(function () {
         const birthdate = $('#birthdate').val();
         const gender = $('input[name="gender"]:checked').val();
         const hobbies = [];
+        const notes = $('#notes').val().trim();
 
         $('input[name="hobby"]:checked').each(function () {
             hobbies.push($(this).val());
@@ -46,8 +47,8 @@ $(document).ready(function () {
             return false;
         }
 
-        if (hobbies.length === 0) {
-            showAlert('Pilih minimal satu hobi!', 'warning');
+        if (hobbies.length < 4) {
+            showAlert('Pilih minimal empat hobi!', 'warning');
             return false;
         }
 
@@ -88,7 +89,11 @@ $(document).ready(function () {
                         <strong class="d-block mb-2"><i class="fas fa-heart"></i> Hobi:</strong>
                         <div class="mt-2">${hobbiesHTML}</div>
                     </div>
-                `;
+                    ${notes ? `<div class="result-item mb-3">
+                     <strong class="d-block mb-2"><i class="fas fa-comment-dots"></i> Catatan Tambahan:</strong>
+                      <span class="text-dark">${notes}</span>
+                        </div>` : ''}
+                 `;
 
         // hasil  modal
         $('#resultContent').html(resultHTML);
@@ -101,6 +106,7 @@ $(document).ready(function () {
         setTimeout(function () {
             $('#otherHobbyInput').hide();
             $('#otherHobbyText').val('');
+            $('#notes').val('');
             showAlert('Form telah direset!', 'info');
         }, 100);
     });
